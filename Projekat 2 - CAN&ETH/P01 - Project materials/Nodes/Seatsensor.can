@@ -1,0 +1,15 @@
+/*@!Encoding:1252*/
+variables
+{
+  //declare LIN frame
+  linFrame Seatsensor msgSeatsensor;
+}
+
+on sysvar LIN::SeatSensor
+{
+  if (@this) @LIN::SeatSensor_Dsp = 1;
+  else @LIN::SeatSensor_Dsp = 0;
+  msgSeatsensor.Seatsensor = @this;
+  output(msgSeatsensor);
+}
+

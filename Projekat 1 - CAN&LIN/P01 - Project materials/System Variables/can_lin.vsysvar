@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<systemvariables version="4">
+  <namespace name="" comment="" interface="">
+    <namespace name="CAN" comment="" interface="">
+      <variable anlyzLocal="0" readOnly="false" valueSequence="false" unit="" name="CloseCar" comment="" bitcount="32" isSigned="true" encoding="65001" type="int" startValue="0" minValue="0" minValuePhys="0" maxValue="1" maxValuePhys="1" />
+      <variable anlyzLocal="0" readOnly="false" valueSequence="false" unit="" name="Driver" comment="" bitcount="32" isSigned="true" encoding="65001" type="int" startValue="0" minValue="0" minValuePhys="0" maxValue="3" maxValuePhys="3" />
+      <variable anlyzLocal="0" readOnly="false" valueSequence="false" unit="" name="IgnitionSwitch" comment="" bitcount="32" isSigned="true" encoding="65001" type="int" startValue="0" minValue="0" minValuePhys="0" maxValue="3" maxValuePhys="3" />
+      <variable anlyzLocal="0" readOnly="false" valueSequence="false" unit="" name="LoggingControl" comment="" bitcount="32" isSigned="true" encoding="65001" type="int" startValue="0" minValue="0" minValuePhys="0" maxValue="1" maxValuePhys="1" />
+      <variable anlyzLocal="0" readOnly="false" valueSequence="false" unit="" name="OpenCar" comment="" bitcount="32" isSigned="true" encoding="65001" type="int" startValue="0" minValue="0" minValuePhys="0" maxValue="1" maxValuePhys="1" />
+      <variable anlyzLocal="0" readOnly="false" valueSequence="false" unit="" name="SetCorruptScheduleError" comment="" bitcount="32" isSigned="true" encoding="65001" type="int" startValue="0" />
+      <variable anlyzLocal="0" readOnly="false" valueSequence="false" unit="" name="SetDistanceError" comment="" bitcount="32" isSigned="true" encoding="65001" type="int" startValue="0" minValue="0" minValuePhys="0" maxValue="1" maxValuePhys="1" />
+      <variable anlyzLocal="0" readOnly="false" valueSequence="false" unit="" name="SetReqRespErrorDriver" comment="" bitcount="32" isSigned="true" encoding="65001" type="int" startValue="0" minValue="0" minValuePhys="0" maxValue="1" maxValuePhys="1" />
+      <variable anlyzLocal="0" readOnly="false" valueSequence="false" unit="" name="SetReqRespErrorPowerOn" comment="" bitcount="32" isSigned="true" encoding="65001" type="int" startValue="0" minValue="0" minValuePhys="0" maxValue="1" maxValuePhys="1" />
+      <variable anlyzLocal="0" readOnly="false" valueSequence="false" unit="" name="SetSlowScheduleError" comment="" bitcount="32" isSigned="true" encoding="65001" type="int" startValue="0" />
+      <variable anlyzLocal="0" readOnly="false" valueSequence="false" unit="" name="StorePositon" comment="" bitcount="32" isSigned="true" encoding="65001" type="int" startValue="0" minValue="0" minValuePhys="0" maxValue="1" maxValuePhys="1" />
+    </namespace>
+    <namespace name="LIN" comment="" interface="">
+      <variable anlyzLocal="0" readOnly="false" valueSequence="false" unit="" name="Head_down" comment="" bitcount="32" isSigned="true" encoding="65001" type="int" startValue="0" minValue="0" minValuePhys="0" maxValue="1" maxValuePhys="1" />
+      <variable anlyzLocal="0" readOnly="false" valueSequence="false" unit="" name="Head_down_Dsp" comment="" bitcount="32" isSigned="true" encoding="65001" type="int" startValue="0" minValue="0" minValuePhys="0" maxValue="1" maxValuePhys="1" />
+      <variable anlyzLocal="0" readOnly="false" valueSequence="false" unit="" name="Head_Dsp" comment="" bitcount="32" isSigned="true" encoding="65001" type="int" startValue="38" minValue="0" minValuePhys="0" maxValue="255" maxValuePhys="255" />
+      <variable anlyzLocal="0" readOnly="false" valueSequence="false" unit="" name="Head_up" comment="" bitcount="32" isSigned="true" encoding="65001" type="int" startValue="0" minValue="0" minValuePhys="0" maxValue="1" maxValuePhys="1" />
+      <variable anlyzLocal="0" readOnly="false" valueSequence="false" unit="" name="Head_up_Dsp" comment="" bitcount="32" isSigned="true" encoding="65001" type="int" startValue="0" minValue="0" minValuePhys="0" maxValue="1" maxValuePhys="1" />
+      <variable anlyzLocal="0" readOnly="false" valueSequence="false" unit="" name="Seat_back" comment="" bitcount="32" isSigned="true" encoding="65001" type="int" startValue="0" minValue="0" minValuePhys="0" maxValue="1" maxValuePhys="1" />
+      <variable anlyzLocal="0" readOnly="false" valueSequence="false" unit="" name="Seat_back_Dsp" comment="" bitcount="32" isSigned="true" encoding="65001" type="int" startValue="0" minValue="0" minValuePhys="0" maxValue="1" maxValuePhys="1" />
+      <variable anlyzLocal="0" readOnly="false" valueSequence="false" unit="" name="Seat_down" comment="" bitcount="32" isSigned="true" encoding="65001" type="int" startValue="0" minValue="0" minValuePhys="0" maxValue="1" maxValuePhys="1" />
+      <variable anlyzLocal="0" readOnly="false" valueSequence="false" unit="" name="Seat_down_Dsp" comment="" bitcount="32" isSigned="true" encoding="65001" type="int" startValue="0" minValue="0" minValuePhys="0" maxValue="1" maxValuePhys="1" />
+      <variable anlyzLocal="0" readOnly="false" valueSequence="false" unit="" name="Seat_Dsp" comment="" bitcount="32" isSigned="true" encoding="65001" type="int" startValue="0" minValue="0" minValuePhys="0" maxValue="255" maxValuePhys="255" />
+      <variable anlyzLocal="0" readOnly="false" valueSequence="false" unit="" name="Seat_forward" comment="" bitcount="32" isSigned="true" encoding="65001" type="int" startValue="0" minValue="0" minValuePhys="0" maxValue="1" maxValuePhys="1" />
+      <variable anlyzLocal="0" readOnly="false" valueSequence="false" unit="" name="Seat_forward_Dsp" comment="" bitcount="32" isSigned="true" encoding="65001" type="int" startValue="0" minValue="0" minValuePhys="0" maxValue="1" maxValuePhys="1" />
+      <variable anlyzLocal="0" readOnly="false" valueSequence="false" unit="" name="Seat_up" comment="" bitcount="32" isSigned="true" encoding="65001" type="int" startValue="0" minValue="0" minValuePhys="0" maxValue="1" maxValuePhys="1" />
+      <variable anlyzLocal="0" readOnly="false" valueSequence="false" unit="" name="Seat_up_Dsp" comment="" bitcount="32" isSigned="true" encoding="65001" type="int" startValue="0" minValue="0" minValuePhys="0" maxValue="1" maxValuePhys="1" />
+      <variable anlyzLocal="0" readOnly="false" valueSequence="false" unit="" name="Seatback_back" comment="" bitcount="32" isSigned="true" encoding="65001" type="int" startValue="0" minValue="0" minValuePhys="0" maxValue="1" maxValuePhys="1" />
+      <variable anlyzLocal="0" readOnly="false" valueSequence="false" unit="" name="Seatback_back_Dsp" comment="" bitcount="32" isSigned="true" encoding="65001" type="int" startValue="16" minValue="0" minValuePhys="0" maxValue="255" maxValuePhys="255" />
+      <variable anlyzLocal="0" readOnly="false" valueSequence="false" unit="" name="Seatback_Dsp" comment="" bitcount="32" isSigned="true" encoding="65001" type="int" startValue="16" minValue="0" minValuePhys="0" maxValue="255" maxValuePhys="255" />
+      <variable anlyzLocal="0" readOnly="false" valueSequence="false" unit="" name="Seatback_forward" comment="" bitcount="32" isSigned="true" encoding="65001" type="int" startValue="0" minValue="0" minValuePhys="0" maxValue="1" maxValuePhys="1" />
+      <variable anlyzLocal="0" readOnly="false" valueSequence="false" unit="" name="Seatback_forward_Dsp" comment="" bitcount="32" isSigned="true" encoding="65001" type="int" startValue="0" minValue="0" minValuePhys="0" maxValue="1" maxValuePhys="1" />
+      <variable anlyzLocal="0" readOnly="false" valueSequence="false" unit="" name="Seatheating" comment="" bitcount="32" isSigned="true" encoding="65001" type="int" startValue="0" minValue="0" minValuePhys="0" maxValue="2" maxValuePhys="2" />
+      <variable anlyzLocal="0" readOnly="false" valueSequence="false" unit="" name="Seatheating_Dsp" comment="" bitcount="32" isSigned="true" encoding="65001" type="int" startValue="0" minValue="0" minValuePhys="0" maxValue="2" maxValuePhys="2" />
+      <variable anlyzLocal="0" readOnly="false" valueSequence="false" unit="" name="Seatheating_LEDDsp" comment="" bitcount="32" isSigned="true" encoding="65001" type="int" startValue="0" minValue="0" minValuePhys="0" maxValue="1" maxValuePhys="1" />
+      <variable anlyzLocal="0" readOnly="false" valueSequence="false" unit="" name="Seathorizontal_Dsp" comment="" bitcount="32" isSigned="true" encoding="65001" type="int" startValue="0" minValue="0" minValuePhys="0" maxValue="255" maxValuePhys="255" />
+      <variable anlyzLocal="0" readOnly="false" valueSequence="false" unit="" name="SeatSensor" comment="" bitcount="32" isSigned="true" encoding="65001" type="int" startValue="0" minValue="0" minValuePhys="0" maxValue="1" maxValuePhys="1" />
+      <variable anlyzLocal="0" readOnly="false" valueSequence="false" unit="" name="SeatSensor_Dsp" comment="" bitcount="32" isSigned="true" encoding="65001" type="int" startValue="0" minValue="0" minValuePhys="0" maxValue="1" maxValuePhys="1" />
+      <variable anlyzLocal="0" readOnly="false" valueSequence="false" unit="" name="Seatvertical_Dsp" comment="" bitcount="32" isSigned="true" encoding="65001" type="int" startValue="8" minValue="0" minValuePhys="0" maxValue="255" maxValuePhys="255" />
+    </namespace>
+  </namespace>
+</systemvariables>

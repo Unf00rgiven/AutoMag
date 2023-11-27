@@ -1,0 +1,102 @@
+/*@!Encoding:1252*/
+includes
+{
+  
+}
+
+variables
+{
+  const int kCLOSE = 0x00;
+  const int kOPEN  = 0x01;
+  const int kON    = 0x01;
+  const int kOFF   = 0x00;
+}
+
+
+
+on message CarLockingSystem
+{
+  if($CarLockingSystem::ActualState == kOPEN){
+    linWakeup();
+  }else {
+    linGotoSleep();
+  }
+}
+
+on sysvar LIN::Seatheating
+{
+  if ($CarLockingSystem::ActualState == kOPEN && $Ignition::PowerOn == kON) {
+    $Heating = @this;
+  } else {
+    $Heating = 0;
+  }
+}
+
+on sysvar LIN::SeatSensor{
+  if ($CarLockingSystem::ActualState == kOPEN && $Ignition::PowerOn == kON) {
+    $Seatsensor = @this;
+  }
+}
+
+
+on sysvar LIN::Head_down {
+  if ($CarLockingSystem::ActualState == kOPEN) {
+    $Head_down = @this;
+    $Head_up = 0x00;
+  }
+}
+
+on sysvar LIN::Head_up {
+  if ($CarLockingSystem::ActualState == kOPEN) {
+    $Head_up = @this;
+    $Head_down = 0x00;
+  }
+}
+
+on sysvar LIN::Seat_up {
+  if ($CarLockingSystem::ActualState == kOPEN) {
+    $Seat_up = @this;
+    $Seat_down = 0x00;
+  }
+}
+
+on sysvar LIN::Seat_down {
+  if ($CarLockingSystem::ActualState == kOPEN) {
+    $Seat_down = @this;
+    $Seat_up = 0x00;
+  }
+}
+
+on sysvar LIN::Seat_forward {
+  if ($CarLockingSystem::ActualState == kOPEN) {
+    $Seat_forward = @this;
+    $Seat_back = 0x00;
+  }
+}
+
+on sysvar LIN::Seat_back {
+  if ($CarLockingSystem::ActualState == kOPEN) {
+    $Seat_back = @this;
+    $Seat_forward = 0x00;
+  }
+}
+
+on sysvar LIN::Seatback_back {
+  if ($CarLockingSystem::ActualState == kOPEN) {
+    $Seatback_back = @this;
+    $Seatback_forward = 0x00;
+  }
+}
+
+on sysvar LIN::Seatback_forward {
+  if ($CarLockingSystem::ActualState == kOPEN) {
+    $Seatback_forward = @this;
+    $Seatback_back = 0x00;
+  }
+}
+
+on sysvar CAN::Driver {
+  if ($CarLockingSystem::ActualState == kOPEN) {
+    $LINdb::Gateway::Seatposition::Driver= @this;
+  }
+}
