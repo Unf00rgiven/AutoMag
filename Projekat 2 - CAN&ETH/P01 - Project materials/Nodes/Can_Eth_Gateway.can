@@ -1,0 +1,199 @@
+/*@!Encoding:1252*/
+
+variables
+{
+  //
+  // Constants
+  //
+  
+  const WORD kPort         = 23; // UDP port number for instance
+  const WORD kRxBufferSize = 1500;
+  const WORD kTxBufferSize = 1500;
+  
+  const int kCLOSE = 0;
+  const int kOPEN  = 1;
+  const int kOFF   = 2;
+  const int kON    = 3;
+  
+  //
+  // Structure of UDP payload
+  //
+  
+  _align(1) struct CANData
+  {
+    int ignitionSwitchValue;
+    int carLockedValue;
+  };
+  
+  //
+  // Global variables
+  //
+  ethernetPacket pkg;
+  message * msg;
+  int msgFlag = 0;
+  
+  int dataType = 0;
+  
+  UdpSocket gSocket;
+  CHAR      gRxBuffer[kRxBufferSize];
+  CHAR      gTxBuffer[kTxBufferSize];
+  DWORD     gOwnAddress;
+  DWORD     gModuleAddress= 0xFFFFFFFF; // default is the broadcast address 255.255.255.255  and the TCP/IP stack will build the Network broadcast address
+}
+
+//
+// Measurement start handler
+//
+
+on start
+{
+  DWORD addresses[1];
+  
+  // get own IP address of the Windows TCP/IP stack
+  IpGetAdapterAddress( 1, addresses, elcount(addresses) );
+  gOwnAddress = addresses[0];
+  
+  // open UDP socket
+  gSocket = UdpSocket::Open( 0, kPort ); 
+  
+  if (gSocket.GetLastSocketError() != 0)
+  {
+    write( "<%BASE_FILE_NAME%> Open UDP socket failed, result %d. Measurement stopped!", gSocket.GetLastSocketError() );
+    stop();
+    return;
+  }
+
+  if (gSocket.ReceiveFrom( gRxBuffer, elcount(gRxBuffer) ) != 0)
+  {
+    if (gSocket.GetLastSocketError() != 997) // ignore pending IO operation
+    {
+      write( "<%BASE_FILE_NAME%> UDPReceive failed, result %d. Measurement stopped!", gSocket.GetLastSocketError() );
+      stop();
+      return;
+    }
+  }
+
+}
+
+on message CarLockingSystem
+{
+  struct CANData canData;
+  
+  canData.carLockedValue = $ActualState;
+  
+  dataType = 0;
+  
+  pkg.source = ethGetMacAddressAsNumber( "20:00:00:00:00:01" );
+  pkg.destination = ethGetMacAddressAsNumber( "FF:FF:FF:FF:FF:FF" );
+  pkg.type = 0xF123; // proprietary Ethertype
+  pkg.Length = __size_of(struct CANData);
+  pkg.SetData( 0, canData );
+
+  output( pkg );
+}
+
+on sysvar CAN::IgnitionSwitch
+{
+  struct CANData canData;
+  
+  canData.ignitionSwitchValue = @this;
+  canData.carLockedValue = $ActualState;
+  
+  dataType = 1;
+  
+  pkg.source = ethGetMacAddressAsNumber( "20:00:00:00:00:01" );
+  pkg.destination = ethGetMacAddressAsNumber( "FF:FF:FF:FF:FF:FF" );
+  pkg.type = 0xF123; // proprietary Ethertype
+  pkg.Length = __size_of(struct CANData);
+  pkg.SetData( 0, canData );
+
+  if ($ActualState)
+  {
+    output( pkg ); 
+  }
+}
+
+on ethernetPacket *
+{
+  HandleUDP(pkg);
+}
+
+void HandleUDP(ethernetPacket * pkg)
+{
+  char buffer[10];
+  word length;
+  int i;
+  
+  int ignitionSwitchValue;
+  int carLockedValue;
+
+  length = pkg.GetData( 0, buffer, elcount(buffer)-1 );
+  buffer[length] = 0; // terminating zero for strings
+  
+  ignitionSwitchValue = buffer[0];
+  carLockedValue = buffer[2];
+  
+  if(carLockedValue && dataType == 0)
+  {
+    write("Car is unlocked");
+    msg.byte(0) = 1;
+    msgFlag = 1;
+    output(msg);
+  }
+  else if (dataType == 0)
+  {
+    write("Car is locked");
+    msg.byte(0) = 0;
+    msgFlag = 1;
+    output(msg);
+  }
+  
+  if (ignitionSwitchValue && dataType == 1)
+  {
+    write("Car engine is on");
+    msg.byte(0) = 3;
+    msgFlag = 1;
+    output(msg);
+  }
+  else if (dataType == 1)
+  {
+    write("Car engine is off");
+    msg.byte(0) = 2;
+    msgFlag = 1;
+    output(msg);
+  }
+    
+//  for (i = 0; i < 10; i++)
+//  {
+//    write("buffer[%d] = %d", i, buffer[i]);
+//  }
+}
+
+on message *
+{
+  if(msgFlag == 1)
+  {
+    HandleCANMessage(msg);
+    msgFlag = 0;
+  }
+}
+
+void HandleCANMessage(message * msg)
+{
+  if (msg.byte(0) == 0)
+  {
+    write("ACK car locked.");
+  }
+  if (msg.byte(0) == 1)
+  {
+    write("ACK car unlocked.");
+  }
+  if (msg.byte(0) == 2)
+  {
+    write("ACK car engine is off.");
+  }
+  if (msg.byte(0) == 3)
+  {
+    write("ACK car engine is on.");
+  }
+}
